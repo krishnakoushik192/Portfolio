@@ -14,24 +14,24 @@ const Projects: React.FC = () => {
       description: 'Cross-platform mobile travel journal application with offline access and cloud synchronization',
       image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=500',
       tech: ['React Native', 'SQLite', 'Supabase'],
-      github: '#',
-      live: '#'
+      github: 'https://github.com/krishnakoushik192/Travel-Journal',
+      live: 'https://github.com/krishnakoushik192/Travel-Journal'
     },
     {
       title: 'Movie Flix',
       description: 'Cross-platform mobile application for browsing, searching, and discovering movies and TV shows',
       image: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=500',
       tech: ['React Native', 'TMDB API'],
-      github: '#',
-      live: '#'
+      github: 'https://github.com/krishnakoushik192/Movie-flix',
+      live: 'https://github.com/krishnakoushik192/Movie-flix'
     },
     {
       title: 'Calendar App',
       description: 'Cross-platform mobile calendar application with Google Calendar integration and OAuth authentication',
       image: 'https://images.pexels.com/photos/3184436/pexels-photo-3184436.jpeg?auto=compress&cs=tinysrgb&w=500',
       tech: ['React Native', 'Firebase', 'Google OAuth'],
-      github: '#',
-      live: '#'
+      github: 'https://github.com/krishnakoushik192/CalendarEvents',
+      live: 'https://github.com/krishnakoushik192/CalendarEvents'
     }
   ];
 
@@ -100,19 +100,21 @@ const Projects: React.FC = () => {
                 <div className="absolute top-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <motion.a
                     href={project.github}
+                    target="_blank"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="bg-black/80 p-2 rounded-full text-white hover:text-blue-400 transition-colors"
                   >
-                    <FaGithub className="text-lg" />
+                    <FaGithub className="text-lg" href={project.github} />
                   </motion.a>
                   <motion.a
                     href={project.live}
+                    target="_blank"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="bg-black/80 p-2 rounded-full text-white hover:text-blue-400 transition-colors"
                   >
-                    <FaExternalLinkAlt className="text-lg" />
+                    <FaExternalLinkAlt className="text-lg" href={project.live}/>
                   </motion.a>
                 </div>
               </div>
