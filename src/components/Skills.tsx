@@ -1,27 +1,35 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { 
-  SiReact, SiTypescript, SiNodedotjs, SiPython, 
-  SiPostgresql, SiMongodb, SiDocker,
-  SiGit, SiTailwindcss, SiGraphql, SiRedis
-} from 'react-icons/si';
-import { FaAws } from 'react-icons/fa';
+import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import {
+  SiReact,
+  SiTypescript,
+  SiNodedotjs,
+  SiPython,
+  SiPostgresql,
+  SiMongodb,
+  SiDocker,
+  SiGit,
+  SiTailwindcss,
+  SiGraphql,
+  SiRedis,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 
 const Skills: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const skills = [
-    { name: 'HTML', icon: SiReact, color: '#E34F26' },
-    { name: 'CSS', icon: SiReact, color: '#1572B6' },
-    { name: 'JavaScript', icon: SiReact, color: '#F7DF1E' },
-    { name: 'React', icon: SiReact, color: '#61DAFB' },
-    { name: 'React Native', icon: SiReact, color: '#61DAFB' },
-    { name: 'Firebase', icon: SiReact, color: '#FFCA28' },
-    { name: 'Supabase', icon: SiReact, color: '#3ECF8E' },
-    { name: 'SQLite', icon: SiReact, color: '#003B57' },
+    { name: "HTML", icon: SiReact, color: "#E34F26" },
+    { name: "CSS", icon: SiReact, color: "#1572B6" },
+    { name: "JavaScript", icon: SiReact, color: "#F7DF1E" },
+    { name: "React", icon: SiReact, color: "#61DAFB" },
+    { name: "React Native", icon: SiReact, color: "#61DAFB" },
+    // { name: 'Firebase', icon: SiReact, color: '#FFCA28' },
+    // { name: 'Supabase', icon: SiReact, color: '#3ECF8E' },
+    // { name: 'SQLite', icon: SiReact, color: '#003B57' },
   ];
 
   const containerVariants = {
@@ -78,14 +86,14 @@ const Skills: React.FC = () => {
               <motion.div
                 key={skill.name}
                 variants={itemVariants}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -10,
-                  boxShadow: `0 20px 40px ${skill.color}20`
+                  boxShadow: `0 20px 40px ${skill.color}20`,
                 }}
                 className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center group hover:border-blue-500/50 transition-all duration-300"
               >
-                <IconComponent 
+                <IconComponent
                   className="text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform duration-300"
                   style={{ color: skill.color }}
                 />
