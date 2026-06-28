@@ -1,35 +1,56 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
+  SiCss3,
+  SiFirebase,
+  SiHtml5,
+  SiJavascript,
   SiReact,
-  SiTypescript,
-  SiNodedotjs,
-  SiPython,
-  SiPostgresql,
-  SiMongodb,
-  SiDocker,
+  SiSqlite,
+  SiSupabase,
   SiGit,
-  SiTailwindcss,
-  SiGraphql,
-  SiRedis,
 } from "react-icons/si";
-import { FaAws } from "react-icons/fa";
+import { Code2, Database, MonitorSmartphone, Wrench } from "lucide-react";
 
 const Skills: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const skills = [
-    { name: "HTML", icon: SiReact, color: "#E34F26" },
-    { name: "CSS", icon: SiReact, color: "#1572B6" },
-    { name: "JavaScript", icon: SiReact, color: "#F7DF1E" },
-    { name: "React", icon: SiReact, color: "#61DAFB" },
-    { name: "React Native", icon: SiReact, color: "#61DAFB" },
-    // { name: 'Firebase', icon: SiReact, color: '#FFCA28' },
-    // { name: 'Supabase', icon: SiReact, color: '#3ECF8E' },
-    // { name: 'SQLite', icon: SiReact, color: '#003B57' },
+  const groups = [
+    {
+      title: "Languages",
+      icon: Code2,
+      items: [
+        { name: "HTML", icon: SiHtml5, color: "#E34F26" },
+        { name: "CSS", icon: SiCss3, color: "#1572B6" },
+        { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+      ],
+    },
+    {
+      title: "Frontend",
+      icon: MonitorSmartphone,
+      items: [
+        { name: "React", icon: SiReact, color: "#61DAFB" },
+        { name: "React Native", icon: SiReact, color: "#61DAFB" },
+      ],
+    },
+    {
+      title: "Backend & Data",
+      icon: Database,
+      items: [
+        { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+        { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+        { name: "SQLite", icon: SiSqlite, color: "#003B57" },
+      ],
+    },
+    {
+      title: "Tools",
+      icon: Wrench,
+      items: [
+        { name: "Git", icon: SiGit, color: "#F05032" },
+      ],
+    },
   ];
 
   const containerVariants = {
@@ -54,23 +75,23 @@ const Skills: React.FC = () => {
         ease: "easeOut",
       },
     },
-  };
+  } as const;
 
   return (
-    <section id="skills" className="py-20 bg-gray-900/50">
-      <div className="container mx-auto px-6">
+    <section id="skills" className="relative py-28">
+      <div className="mx-auto max-w-6xl px-6">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 max-w-3xl"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent">
-            Skills & Technologies
+          <h2 className="text-4xl font-semibold leading-tight text-white md:text-6xl">
+            Technical Toolbox
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A comprehensive toolkit for building modern, scalable applications
+          <p className="mt-5 text-lg leading-8 text-zinc-400">
+            A focused toolkit for building modern mobile apps, connected interfaces, and reliable data-backed product flows.
           </p>
         </motion.div>
 
@@ -78,28 +99,34 @@ const Skills: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+          className="grid gap-6 md:grid-cols-3"
         >
-          {skills.map((skill, index) => {
-            const IconComponent = skill.icon;
+          {groups.map((group) => {
+            const GroupIcon = group.icon;
             return (
               <motion.div
-                key={skill.name}
+                key={group.title}
                 variants={itemVariants}
-                whileHover={{
-                  scale: 1.05,
-                  y: -10,
-                  boxShadow: `0 20px 40px ${skill.color}20`,
-                }}
-                className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 text-center group hover:border-blue-500/50 transition-all duration-300"
+                whileHover={{ y: -8 }}
+                className={`relative overflow-hidden rounded-2xl border border-white/15 bg-white/[0.075] p-6 shadow-2xl shadow-black/20 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 transition hover:border-cyan-200/40 hover:bg-white/[0.095] hover:shadow-cyan-950/20 ${group.title === "Tools" ? "md:col-span-2" : ""}`}
               >
-                <IconComponent
-                  className="text-4xl mb-4 mx-auto group-hover:scale-110 transition-transform duration-300"
-                  style={{ color: skill.color }}
-                />
-                <h3 className="text-white font-semibold group-hover:text-blue-400 transition-colors">
-                  {skill.name}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/12 via-white/[0.025] to-transparent" />
+                <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/60 to-transparent" />
+                <h3 className="relative z-10 mb-6 flex items-center gap-3 text-xl font-semibold text-white">
+                  <GroupIcon className="h-5 w-5 text-cyan-200" />
+                  {group.title}
                 </h3>
+                <div className="relative z-10 flex flex-wrap gap-3">
+                  {group.items.map((skill) => {
+                    const IconComponent = skill.icon;
+                    return (
+                      <span key={skill.name} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.07] px-4 py-2 text-sm text-zinc-200 shadow-sm backdrop-blur-xl ring-1 ring-white/10">
+                        <IconComponent className="h-4 w-4" style={{ color: skill.color }} />
+                        {skill.name}
+                      </span>
+                    );
+                  })}
+                </div>
               </motion.div>
             );
           })}
