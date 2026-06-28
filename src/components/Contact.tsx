@@ -1,8 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaHeart } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   const ref = useRef(null);
@@ -37,79 +36,62 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-black">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="relative px-6 py-28">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="text-center max-w-4xl mx-auto"
+          className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.075] px-6 py-20 text-center shadow-2xl shadow-black/25 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 md:px-16"
         >
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.22),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.025)_42%,transparent)]" />
+          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/70 to-transparent" />
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent"
+            className="relative z-10 mx-auto max-w-3xl text-4xl font-semibold leading-tight text-white md:text-6xl"
           >
-            Let's Connect
+            Let&apos;s build a mobile experience that feels clear and useful.
           </motion.h2>
-          
+
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="relative z-10 mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-400"
           >
-            Ready to bring your ideas to life? Let's discuss how we can work together to create something amazing.
+            I&apos;m open to React Native opportunities, internships, and product-focused collaborations.
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mb-12"
+            className="relative z-10 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <motion.a
+            <a
               href="mailto:koushikaraveti24@gmail.com"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 group"
+              className="inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition hover:bg-cyan-200"
             >
-              <FaEnvelope className="mr-3 group-hover:animate-bounce" />
-              koushikaraveti24@gmail.com
-            </motion.a>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center space-x-8 mb-16"
-          >
-            {socialLinks.map(({ icon: Icon, href, label }, index) => (
-              <motion.a
+              <FaEnvelope />
+              Email Me
+            </a>
+            {socialLinks.map(({ icon: Icon, href, label }) => (
+              <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ y: -10, scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                className="text-gray-400 hover:text-blue-400 text-3xl transition-colors duration-300 relative group"
+                className="inline-flex items-center gap-3 rounded-full border border-white/15 px-8 py-4 text-sm font-bold text-white transition hover:border-cyan-200 hover:text-cyan-100"
                 aria-label={label}
               >
                 <Icon />
-                <span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {label}
-                </span>
-              </motion.a>
+                {label}
+              </a>
             ))}
           </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="border-t border-gray-800 pt-8"
-          >
-            <p className="text-gray-500 flex items-center justify-center">
-              Built with <FaHeart className="text-red-500 mx-2" /> using React & Framer Motion
-            </p>
-            <p className="text-gray-600 text-sm mt-2">
-              © 2025 Araveti Sumadhar Krishna koushik. All rights reserved.
-            </p>
-          </motion.div>
         </motion.div>
+
+        <footer className="mt-14 flex flex-col gap-4 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
+          <p className="text-2xl font-semibold text-white">ASKK</p>
+          <p>&copy; 2026 Araveti Sumadhar Krishna Koushik. Built with React & Framer Motion.</p>
+        </footer>
       </div>
     </section>
   );
