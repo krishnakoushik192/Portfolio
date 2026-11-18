@@ -2,16 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    @apply bg-surface font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-surface;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p, li {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-surface;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
-body {
-  margin: 0;
-  background: #06070a;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
+/* Named text styles. Nova uses bold Satoshi with tight tracking for headings. */
+@layer components {
+  .heading-1 { @apply text-6xl font-bold tracking-display; }
+  .heading-2 { @apply text-5xl font-bold tracking-heading; }
+  .heading-3 { @apply text-4xl font-bold tracking-heading; }
+  .heading-4 { @apply text-3xl font-bold tracking-heading; }
+  .heading-5 { @apply text-2xl font-bold tracking-tight; }
+  .heading-6 { @apply text-xl font-bold tracking-tight; }
 
-* {
-  box-sizing: border-box;
+  .title-1 { @apply text-xl font-medium; }
+  .title-2 { @apply text-lg font-medium; }
+  .title-3 { @apply text-base font-medium; }
+  .title-4 { @apply text-sm font-medium; }
+  .title-5 { @apply text-xs font-medium; }
+
+  .body-1 { @apply text-base font-bold; }
+  .body-2 { @apply text-base font-medium; }
+  .body-3 { @apply text-base font-normal leading-7; }
+  .body-4 { @apply text-sm font-bold; }
+  .body-5 { @apply text-sm font-medium; }
+  .body-6 { @apply text-sm font-normal; }
+  .body-7 { @apply text-lg font-normal leading-8; }
+
+  .button-lg { @apply text-lg font-bold; }
+  .button-md { @apply text-base font-bold; }
+  .button-sm { @apply text-sm font-bold; }
+  .button-xsm { @apply text-xs font-bold; }
+
+  .caption-1 { @apply text-sm font-medium; }
+  .caption-2 { @apply text-sm font-normal; }
+  .caption-3 { @apply text-xs font-bold; }
+  .caption-4 { @apply text-xs font-medium; }
+  .caption-5 { @apply text-xs font-normal; }
+
+  /* Black pill with the soft Nova shadow. */
+  .btn-primary {
+    @apply button-md inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-surface shadow-pill transition duration-300 ease-base hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .btn-light {
+    @apply button-md inline-flex items-center gap-3 rounded-full bg-surface px-6 py-3 text-ink transition duration-300 ease-base hover:-translate-y-0.5 hover:bg-accent-soft active:translate-y-0 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply button-md inline-flex items-center gap-3 rounded-full border border-current px-6 py-3 transition duration-300 ease-base hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
+  }
+
+  .chip {
+    @apply caption-4 rounded-full border border-surface-line bg-surface px-3 py-1 text-ink-soft;
+  }
+
+  .section {
+    @apply mx-auto w-full max-w-7xl px-6 py-24 md:px-12 md:py-32;
+  }
+
+  /* Uppercase tracked label, e.g. STRATEGY / DESIGN / TECHNOLOGY. */
+  .eyebrow {
+    @apply caption-3 uppercase tracking-[0.2em] text-accent-ink;
+  }
 }

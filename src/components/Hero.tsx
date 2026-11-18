@@ -1,98 +1,121 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDown } from '@phosphor-icons/react';
+import { mailto, profile } from '../data/portfolio';
+import { EASE_BASE } from '../lib/motion';
+import ArrowIcon from './ArrowIcon';
+
+const proof = ['1 year at Verona Matchmaking', '5 apps built', 'Megathon 2026', 'CGPA 8.3'];
+
+// Lines of the headline; `accent` words render in tan, as in Nova.
+const HEADLINE: { text: string; accent?: boolean }[][] = [
+  [{ text: 'React Native apps' }],
+  [{ text: 'built to ship on' }],
+  [{ text: 'iOS and Android', accent: true }],
+];
 
 const Hero: React.FC = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const reduce = useReducedMotion();
+  const { scrollY } = useScroll();
+  const imageY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : 40]);
+  const imageScale = useTransform(scrollY, [0, 700], [1, reduce ? 1 : 1.05]);
+
+  const focusIn = (delay: number) => ({
+    initial: reduce ? { opacity: 0 } : { opacity: 0, y: 24, filter: 'blur(10px)' },
+    animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    transition: { duration: 0.9, delay, ease: EASE_BASE },
+  });
 
   return (
-    <section id="hero" className="relative min-h-[118vh] overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-[92vh] bg-[radial-gradient(circle_at_48%_0%,rgba(34,211,238,0.32),transparent_34%),linear-gradient(120deg,rgba(34,211,238,0.16)_0%,rgba(14,165,233,0.08)_35%,rgba(16,185,129,0.15)_76%,transparent_100%)] [mask-image:linear-gradient(180deg,black_0%,black_42%,transparent_100%)]" />
-      <div className="absolute inset-x-0 top-[22vh] h-[48vh] bg-[linear-gradient(180deg,transparent_0%,rgba(6,7,10,0.42)_55%,transparent_100%)]" />
-      <div className="absolute left-1/2 top-[22%] h-72 w-72 -translate-x-1/2 rounded-full border border-cyan-300/20 bg-cyan-300/10 blur-3xl" />
-
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 pt-28 text-center">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mb-8 h-36 w-36 overflow-hidden rounded-full border border-white/15 bg-gradient-to-br from-cyan-200 via-white to-emerald-200 p-1 shadow-2xl shadow-cyan-950/60">
-          <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0d1117] text-3xl font-bold tracking-wide text-white">
-            ASKK
-          </div>
-        </motion.div>
-
-        <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-          React Native Developer
+    <section
+      id="top"
+      className="mx-auto grid w-full max-w-7xl items-center gap-12 px-6 pb-16 pt-32 md:px-12 md:pt-40 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16"
+    >
+      <div>
+        <motion.p {...focusIn(0)} className="eyebrow">
+          Mobile / React Native / iOS and Android
         </motion.p>
 
-        <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.2 }} className="max-w-5xl text-5xl font-semibold leading-[0.96] text-white md:text-7xl lg:text-8xl">
-          Araveti Sumadhar Krishna Koushik
-        </motion.h1>
-
-        <motion.p initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.35 }} className="mt-8 max-w-2xl text-lg leading-8 text-zinc-300 md:text-xl">
-          Enthusiastic mobile developer building functional, testable apps with JavaScript, React, React Native, and practical state management.
-        </motion.p>
-
-        <motion.div initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85, delay: 0.5 }} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-          <button onClick={() => scrollToSection('projects')} className="rounded-full bg-white px-8 py-4 text-sm font-bold text-black shadow-xl shadow-cyan-950/40 transition hover:bg-cyan-200">
-            View My Work
-          </button>
-          <button onClick={() => scrollToSection('contact')} className="rounded-full border border-white/15 px-8 py-4 text-sm font-bold text-white transition hover:border-cyan-200 hover:text-cyan-100">
-            Start a Conversation
-          </button>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.65 }} className="mt-12 flex items-center gap-7">
-          {[
-            { Icon: FaGithub, href: 'https://github.com/krishnakoushik192', label: 'GitHub' },
-            { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/araveti-sumadhar-krishna-koushik/', label: 'LinkedIn' },
-          ].map(({ Icon, href, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="text-2xl text-zinc-400 transition hover:-translate-y-1 hover:text-cyan-200">
-              <Icon />
-            </a>
+        <h1 className="heading-3 mt-6 max-w-[680px] text-ink sm:heading-2 lg:heading-1" aria-label={HEADLINE.flat().map((w) => w.text).join(' ')}>
+          {HEADLINE.map((line, i) => (
+            <span key={i} className="block overflow-hidden pb-1" aria-hidden>
+              <motion.span
+                className="block"
+                initial={reduce ? { opacity: 0 } : { y: '110%', filter: 'blur(6px)' }}
+                animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 1, delay: 0.1 + i * 0.12, ease: EASE_BASE }}
+              >
+                {line.map((w) => (
+                  <span key={w.text} className={w.accent ? 'text-accent' : undefined}>
+                    {w.text}
+                  </span>
+                ))}
+              </motion.span>
+            </span>
           ))}
+        </h1>
+
+        <motion.p {...focusIn(0.45)} className="body-3 mt-6 max-w-[560px] text-ink-muted md:body-7">
+          I'm {profile.shortName}, a mobile developer and CS student at BITS Pilani. I spent a year building
+          production features at Verona Matchmaking, and I'm now open to full time roles, internships, and
+          freelance projects.
+        </motion.p>
+
+        <motion.div {...focusIn(0.55)} className="mt-10 flex flex-wrap items-center gap-6">
+          <a href={mailto} className="group btn-primary">
+            Email me about a role
+            <ArrowIcon />
+          </a>
+          <a href="#work" className="group body-2 inline-flex items-center gap-2 rounded-md text-ink transition duration-300 ease-base hover:text-accent-ink">
+            See my work
+            <ArrowDown size={16} weight="bold" aria-hidden className="transition-transform duration-300 ease-base group-hover:translate-y-1" />
+          </a>
         </motion.div>
+
+        <motion.ul {...focusIn(0.7)} className="mt-12 flex flex-wrap gap-x-6 gap-y-2" aria-label="Highlights">
+          {proof.map((item) => (
+            <li key={item} className="caption-2 flex items-center gap-2 text-ink-muted">
+              <span className="h-1 w-1 rounded-full bg-accent" aria-hidden />
+              {item}
+            </li>
+          ))}
+        </motion.ul>
       </div>
 
-      <section id="about" className="relative z-10 mx-auto grid max-w-6xl gap-12 px-6 pb-28 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-        <div className="relative">
-          <div className="aspect-[4/5] overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(34,211,238,0.26),rgba(16,185,129,0.12)),url('https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=900')] bg-cover bg-center shadow-2xl shadow-black/50" />
-          <div className="absolute -bottom-7 right-6 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.075] px-6 py-5 shadow-2xl shadow-black/25 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150">
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/14 via-white/[0.03] to-transparent" />
-            <div className="relative z-10">
-              <p className="text-4xl font-semibold text-white">3+</p>
-              <p className="mt-1 text-sm text-zinc-400">mobile projects shipped</p>
-            </div>
-          </div>
+      {/* Organic blob framed image, like Nova's hero portrait. */}
+      <motion.div
+        className="relative mx-auto h-[clamp(22rem,80vw,30rem)] w-full max-w-[560px] lg:h-[clamp(32rem,42vw,40rem)]"
+        initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, filter: 'blur(12px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 1.2, delay: 0.25, ease: EASE_BASE }}
+      >
+        <span
+          aria-hidden
+          className="absolute -right-6 -top-6 h-32 w-32 rounded-full border border-accent/40 motion-safe:animate-spinslow md:h-40 md:w-40"
+          style={{ borderStyle: 'dashed' }}
+        />
+        <div className="relative h-full w-full overflow-hidden rounded-[42%_58%_46%_54%/38%_44%_56%_62%] bg-accent-soft">
+          <motion.img
+            src={profile.heroImage}
+            alt={`Pencil sketch portrait of ${profile.shortName}`}
+            style={{ y: imageY, scale: imageScale }}
+            className="absolute inset-0 h-full w-full object-cover object-top mix-blend-multiply"
+          />
         </div>
 
-        <div>
-          <div className="mb-6 flex items-center gap-4">
-            <span className="h-px w-12 bg-cyan-200" />
-            <span className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-200">About</span>
-          </div>
-          <h2 className="max-w-xl text-4xl font-semibold leading-tight text-white md:text-5xl">
-            I turn practical product ideas into polished mobile experiences.
-          </h2>
-          <div className="mt-8 space-y-5 text-lg leading-8 text-zinc-300">
-            <p>
-              I am a Computer Science student focused on cross-platform mobile development. My work centers on building dependable React Native apps that feel clear, fast, and useful.
-            </p>
-            <p>
-              Through projects like Travel Journal, Movie Flix, and Calendar Events, I have worked with offline storage, external APIs, authentication flows, and production-minded UI implementation.
-            </p>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {['React Native', 'JavaScript', 'Firebase', 'SQLite', 'Supabase'].map((item) => (
-              <span key={item} className="rounded-full border border-white/15 bg-white/[0.075] px-4 py-2 text-sm text-zinc-200 shadow-sm backdrop-blur-xl ring-1 ring-white/10">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+        <motion.div
+          className="absolute -left-2 bottom-8 flex items-center gap-3 rounded-full bg-surface px-4 py-3 shadow-pill md:-left-8"
+          initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9, ease: EASE_BASE }}
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 motion-safe:animate-ping" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+          </span>
+          <span className="caption-1 text-ink">{profile.availability}</span>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
