@@ -1,100 +1,78 @@
 import React from 'react';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { GithubLogo, LinkedinLogo } from '@phosphor-icons/react';
+import { mailto, profile } from '../data/portfolio';
+import ArrowIcon from './ArrowIcon';
+import Reveal from './Reveal';
 
-const Contact: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+const footerLinks = [
+  { name: 'Work', href: '#work' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Certificates', href: '#certificates' },
+];
 
-  const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/krishnakoushik192', label: 'GitHub' },
-    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/araveti-sumadhar-krishna-koushik/', label: 'LinkedIn' },
-  ];
+/** Nova's dark closing section, with the footer inside it. */
+const Contact: React.FC = () => (
+  <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-surface-deep text-surface">
+    <span aria-hidden className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full border border-accent/30 motion-safe:animate-spinslow" style={{ borderStyle: 'dashed' }} />
+    <span aria-hidden className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-accent/15 motion-safe:animate-float" />
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.2,
-      },
-    },
-  };
+    <div className="relative mx-auto w-full max-w-7xl px-6 pb-12 pt-24 md:px-12 md:pt-32">
+      <Reveal>
+        <p className="caption-3 uppercase tracking-[0.2em] text-accent">Open to new work</p>
+        <h2 id="contact-title" className="heading-3 mt-6 max-w-[680px] font-normal tracking-display md:heading-1 md:font-normal">
+          Let's build something <span className="text-accent">together</span>
+        </h2>
+        <p className="body-3 mt-6 max-w-[520px] text-surface/70 md:body-7">
+          I'm open to full time roles, internships, and freelance projects. Tell me what you're building and what you
+          need from a mobile developer.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <a href={mailto} className="group btn-light">
+            Email me about a role
+            <ArrowIcon />
+          </a>
+          <a href="#work" className="group btn-outline text-surface hover:bg-surface/10">
+            See my work
+            <ArrowIcon />
+          </a>
+        </div>
+        <p className="caption-2 mt-6 text-surface/50">{profile.email}</p>
+      </Reveal>
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
-  return (
-    <section id="contact" className="relative px-6 py-28">
-      <div className="mx-auto max-w-6xl">
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/[0.075] px-6 py-20 text-center shadow-2xl shadow-black/25 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150 md:px-16"
-        >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.22),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.025)_42%,transparent)]" />
-          <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-100/70 to-transparent" />
-          <motion.h2
-            variants={itemVariants}
-            className="relative z-10 mx-auto max-w-3xl text-4xl font-semibold leading-tight text-white md:text-6xl"
-          >
-            Let&apos;s build a mobile experience that feels clear and useful.
-          </motion.h2>
-
-          <motion.p
-            variants={itemVariants}
-            className="relative z-10 mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-400"
-          >
-            I&apos;m open to React Native opportunities, internships, and product-focused collaborations.
-          </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            className="relative z-10 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <a
-              href="mailto:koushikaraveti24@gmail.com"
-              className="inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition hover:bg-cyan-200"
-            >
-              <FaEnvelope />
-              Email Me
-            </a>
-            {socialLinks.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 rounded-full border border-white/15 px-8 py-4 text-sm font-bold text-white transition hover:border-cyan-200 hover:text-cyan-100"
-                aria-label={label}
-              >
-                <Icon />
-                {label}
+      <footer className="mt-24 flex flex-col gap-8 border-t border-surface/15 pt-8 md:flex-row md:items-center md:justify-between">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          {footerLinks.map((l) => (
+            <li key={l.name}>
+              <a href={l.href} className="body-5 rounded-md text-surface/70 transition duration-300 ease-base hover:text-surface">
+                {l.name}
               </a>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        <footer className="mt-14 flex flex-col gap-4 text-sm text-zinc-500 md:flex-row md:items-center md:justify-between">
-          <p className="text-2xl font-semibold text-white">ASKK</p>
-          <p>&copy; 2026 Araveti Sumadhar Krishna Koushik. Built with React & Framer Motion.</p>
-        </footer>
-      </div>
-    </section>
-  );
-};
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center gap-2">
+          {[
+            { href: profile.github, label: 'GitHub', Icon: GithubLogo },
+            { href: profile.linkedin, label: 'LinkedIn', Icon: LinkedinLogo },
+          ].map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-surface/20 text-surface/80 transition duration-300 ease-base hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+            >
+              <Icon size={18} weight="bold" aria-hidden />
+            </a>
+          ))}
+        </div>
+      </footer>
+      <p className="caption-2 mt-8 text-surface/50">
+        © {new Date().getFullYear()} {profile.name}
+      </p>
+    </div>
+  </section>
+);
 
 export default Contact;
