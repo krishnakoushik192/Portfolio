@@ -16,7 +16,33 @@ export type ExperienceEntry = {
   tech: string[];
 };
 
+export type Certificate = {
+  title: string;
+  issuer: string;
+  date: string;
+  description: string;
+  image: string;
+  credentialId?: string;
+  tags: string[];
+};
+
 export const projects: Project[] = [
+  {
+    title: 'VaaniAI',
+    description: 'Billing and khata app for small shopkeepers: record bills, track customer dues, share PDF bills and UPI QR codes, backed by a TypeScript Express + MongoDB API with Gemini-powered AI features.',
+    image: 'https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    tech: ['React Native', 'TypeScript', 'Node.js', 'MongoDB', 'Gemini'],
+    github: 'https://github.com/krishnakoushik192/VaaniAI',
+    live: 'https://github.com/krishnakoushik192/VaaniAI-BE',
+  },
+  {
+    title: 'Game2048',
+    description: 'Polished 2048 puzzle game with swipe gestures, smooth tile animations, undo, onboarding tutorial, and best-score persistence on Android and iOS.',
+    image: 'https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    tech: ['React Native', 'TypeScript', 'Reanimated', 'AsyncStorage'],
+    github: 'https://github.com/krishnakoushik192/Game2048',
+    live: 'https://github.com/krishnakoushik192/Game2048',
+  },
   {
     title: 'Travel Journal',
     description: 'Cross-platform travel journal with offline access, local persistence, and cloud synchronization for mobile-first explorers.',
@@ -46,8 +72,8 @@ export const projects: Project[] = [
 export const experiences: ExperienceEntry[] = [
   {
     company: 'Verona Matchmaking',
-    role: 'React Native Developer',
-    duration: 'Sep 2025 - Present',
+    role: 'React Native Developer Intern',
+    duration: 'Sep 2025 - Sep 2026',
     location: 'Gurgaon, Haryana, India',
     highlights: [
       'Developed and maintained cross-platform mobile applications using React Native',
@@ -60,7 +86,7 @@ export const experiences: ExperienceEntry[] = [
   {
     company: 'BITS PILANI',
     role: 'Bachelor of Science in Computer Science',
-    duration: 'Aug 2027 - Present',
+    duration: '2024 - Present',
     location: 'CGPA: 8.3',
     highlights: [
       'Currently pursuing Bachelor of Science in Computer Science',
@@ -68,5 +94,17 @@ export const experiences: ExperienceEntry[] = [
       'Focusing on mobile development and modern web technologies',
     ],
     tech: ['Computer Science', 'Mobile Development', 'Web Technologies'],
+  },
+];
+
+export const certificates: Certificate[] = [
+  {
+    title: 'Megathon 2026 - Certificate of Recognition',
+    issuer: 'E-Cell IIIT Hyderabad x Lloyds',
+    date: '2026',
+    description: 'Recognized as a participant in Megathon 2026 with Team Alpha-coders, showcasing exceptional coding calibre.',
+    image: '/certificates/megathon-2026.png',
+    credentialId: 'R1FH-XBN4-7C4S',
+    tags: ['Hackathon', 'Team Alpha-coders'],
   },
 ];

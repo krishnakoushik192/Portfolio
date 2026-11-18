@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
           <div className="absolute -bottom-7 right-6 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.075] px-6 py-5 shadow-2xl shadow-black/25 ring-1 ring-white/10 backdrop-blur-2xl backdrop-saturate-150">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/14 via-white/[0.03] to-transparent" />
             <div className="relative z-10">
-              <p className="text-4xl font-semibold text-white">3+</p>
+              <p className="text-4xl font-semibold text-white">5+</p>
               <p className="mt-1 text-sm text-zinc-400">mobile projects shipped</p>
             </div>
           </div>
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
               I am a Computer Science student focused on cross-platform mobile development. My work centers on building dependable React Native apps that feel clear, fast, and useful.
             </p>
             <p>
-              Through projects like Travel Journal, Movie Flix, and Calendar Events, I have worked with offline storage, external APIs, authentication flows, and production-minded UI implementation.
+              Through projects like VaaniAI, Game2048, Travel Journal, and Movie Flix, I have worked with offline storage, external APIs, backend services, authentication flows, and production-minded UI implementation.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
